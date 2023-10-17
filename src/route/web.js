@@ -7,7 +7,11 @@ let init_web_routers = (app) => {
 
     router.get("/crud", home_controller.get_crud)
 
+    router.get("/get_crud", home_controller.display_get_curd)
+
     router.post("/post_crud", home_controller.post_crud)
+
+    router.get("/edit_crud", home_controller.edit_crud)
     return app.use("/", router)
 }
 

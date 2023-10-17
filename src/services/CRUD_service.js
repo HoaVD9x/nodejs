@@ -30,13 +30,48 @@ let hash_user_password = (password) => {
     return new Promise(async (resolve, reject) => {
         try {
             const hash_password = await bcrypt.hashSync(password, salt)
-            resolve(hash_password)
+            resolve(hash_password);
         } catch (e) {
             reject(e)
         }
     })
 }
 
+let get_all_user = () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let users = db.User.findAll({
+                raw: true,
+            })
+            resolve(users)
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
+
+
+let get_user_by_user_id = (user_id) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let user = await db.User.findOne({
+                where: {
+                    id: user_id
+                },
+                raw: true
+            })
+            if (user) { resolve(user) } else {
+                resolve({})
+            }
+        } catch (e) {
+            reject(e)
+        }
+    })
+
+}
+
 module.exports = {
-    create_new_user: create_new_user
+    create_new_user: create_new_user,
+    get_all_user: get_all_user,
+    get_user_by_user_id: get_user_by_user_id,
 }
