@@ -3,4 +3,8 @@ const handler_login = (email, password) => {
     return axios.post("/api/login", { email, password });
 }
 
-export { handler_login }
+const get_all_user = (id) => {
+    return axios.get(`/api/get_all_user?id=${id}`)
+}
+
+export { handler_login, get_all_user }
