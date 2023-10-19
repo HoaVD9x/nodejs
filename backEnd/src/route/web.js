@@ -17,6 +17,12 @@ let init_web_routers = (app) => {
     router.post("/api/login", user_controller.handler_login)
 
     router.get("/api/get_all_user", user_controller.handler_get_all_user)
+
+    router.post("/api/create_new_user", user_controller.handler_create_new_user)
+
+    router.put("/api/edit_user", user_controller.handler_edit_user)
+
+    router.delete("/api/delete_user", user_controller.handler_delete_user)
     return app.use("/", router)
 }
 

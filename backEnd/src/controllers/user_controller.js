@@ -44,7 +44,37 @@ let handler_get_all_user = async (request, response) => {
         users
     })
 }
+
+let handler_create_new_user = async (request, response) => {
+    let message = await user_service.create_new_user(request.body)
+    return response.status(200).json(message)
+}
+
+let handler_edit_user = async (request, response) => {
+    if (!request.body.id) {
+        return response.status(200).json({
+            err_code: 1,
+            err_message: "missing required parameter !"
+        })
+    }
+    let message = await user_service.create_edit_user(request.body)
+    return response.status(200).json(message)
+}
+
+let handler_delete_user = async (request, response) => {
+    if (!request.body.id) {
+        return response.status(200).json({
+            err_code: 1,
+            err_message: "missing required parameter !"
+        })
+    }
+    let message = await user_service.create_delete_user(request.body.id)
+    return response.status(200).json(message)
+}
 module.exports = {
     handler_login: handler_login,
     handler_get_all_user: handler_get_all_user,
+    handler_create_new_user: handler_create_new_user,
+    handler_edit_user: handler_edit_user,
+    handler_delete_user: handler_delete_user,
 }
