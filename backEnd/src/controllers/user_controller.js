@@ -27,6 +27,24 @@ let handler_login = async (request, response) => {
 }
 
 
+let handler_get_all_user = async (request, response) => {
+    let id = request.query.id  // all or single
+
+    if (!id) {
+        return response.status(200).json({
+            err_code: 1,
+            err_message: "missing required parameter",
+            users: []
+        })
+    }
+    let users = await user_service.get_all_user(id)
+    return response.status(200).json({
+        err_code: 0,
+        err_message: "ok",
+        users
+    })
+}
 module.exports = {
     handler_login: handler_login,
+    handler_get_all_user: handler_get_all_user,
 }

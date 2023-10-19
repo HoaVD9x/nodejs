@@ -15,6 +15,8 @@ let init_web_routers = (app) => {
     router.get("/edit_crud", home_controller.edit_crud)
 
     router.post("/api/login", user_controller.handler_login)
+
+    router.get("/api/get_all_user", user_controller.handler_get_all_user)
     return app.use("/", router)
 }
 

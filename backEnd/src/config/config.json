@@ -11,7 +11,12 @@
     "password": null,
     "database": "database_test",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "logging":false,
+    "query":{
+      "raw":true
+    },
+    "timezone":"+09:00"
   },
   "production": {
     "username": "root",
