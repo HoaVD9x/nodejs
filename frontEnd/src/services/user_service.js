@@ -7,4 +7,8 @@ const get_all_user = (id) => {
     return axios.get(`/api/get_all_user?id=${id}`)
 }
 
-export { handler_login, get_all_user }
+const createNewUserService = (data) => {
+
+    return axios.post("/api/create_new_user", data)
+}
+export { handler_login, get_all_user, createNewUserService }
