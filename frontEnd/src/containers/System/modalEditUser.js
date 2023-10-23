@@ -10,6 +10,7 @@ class ModalEditUser extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            id: "",
             email: "",
             password: "",
             first_name: "",
@@ -22,9 +23,9 @@ class ModalEditUser extends Component {
 
     componentDidMount() {
         let user = this.props.currentUser
-        console.log("log when didmount", user)
         if (user && !_.isEmpty(user)) {
             this.setState({
+                id: user.id,
                 email: user.email,
                 password: "hascode",
                 first_name: user.first_name,
@@ -51,7 +52,7 @@ class ModalEditUser extends Component {
         let isValid = this.checkValidateInput(this.state)
         if (isValid) {
             // call api model
-            // this.props.editUser(this.state)
+            this.props.editUser(this.state)
         }
     }
 
@@ -69,7 +70,6 @@ class ModalEditUser extends Component {
         return isValid;
     }
     render() {
-        console.log("render", this.props)
         return (
             <Modal
                 isOpen={this.props.isOpen}

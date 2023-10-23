@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { get_all_user, createNewUserService, deleteUserService } from '../../services/user_service';
+import { get_all_user, createNewUserService, deleteUserService, editUserService } from '../../services/user_service';
 import ModalUser from './modal_user';
 import modalEditUser from './modalEditUser';
 import "./user_manage.scss";
@@ -19,7 +19,7 @@ class UserManage extends Component {
             arrUsers: [],
             isOpenModalUser: false,
             isOpenModalEditUser: false,
-            editUser: []
+            userEdit: []
         }
     }
 
@@ -88,7 +88,7 @@ class UserManage extends Component {
     handleEditUser = (user) => {
         this.setState({
             isOpenModalEditUser: true,
-            editUser: user
+            userEdit: user
         })
     }
 
@@ -98,8 +98,21 @@ class UserManage extends Component {
         })
     }
 
-    doEditUser = (user) => {
-        console.log("user when save user", user)
+    doEditUser = async (user) => {
+        try {
+            let response = await editUserService(user)
+            if (response && response.err_code === 0) {
+                this.setState({
+                    isOpenModalEditUser: false
+                })
+                await this.getAllUserFromData()
+            } else {
+                alert(response.err_message)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+
     }
     render() {
 
@@ -111,12 +124,13 @@ class UserManage extends Component {
                     topggerFromParent={this.toggeUserModal}
                     createNewUser={this.createNewUser}
                 />
-                <ModalEditUser
-                    isOpen={this.state.isOpenModalEditUser}
-                    topggerFromParent={this.toggeEditUserModal}
-                    currentUser={this.state.editUser}
-                // editUser={this.doEditUser}
-                />
+                {this.state.isOpenModalEditUser &&
+                    <ModalEditUser
+                        isOpen={this.state.isOpenModalEditUser}
+                        topggerFromParent={this.toggeEditUserModal}
+                        currentUser={this.state.userEdit}
+                        editUser={this.doEditUser}
+                    />}
                 <div className='title text-center'>Manage users</div>
                 <div className='mx-3'>
                     <button className='btn btn-primary px-3' onClick={() => this.handler_add_new_user()}> <i className="fas fa-plus"></i> Add new User</button>

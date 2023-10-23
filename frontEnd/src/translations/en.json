@@ -1,4 +1,19 @@
 {
+    "home-header": {
+        "speciality": "chuyên khoa",
+        "search-doctor": "tìm bác sỹ theo chuyên khoa",
+        "health-facility": "cơ sở y tế",
+        "Choose_a_hospital_or_clinic": "chọn bệnh viện phòng khám ",
+        "doctor": "bác sỹ",
+        "Choose_a_good_doctor": "chọn bác sỹ ",
+        "examination_package": "gói khám ",
+        "General_health_check": "khám sức khỏe tổng quát",
+        "support": "hỗ trợ"
+    },
+    "banner": {
+        "title1": " nền tảng y tế",
+        "title2": "chắm sóc sức khỏe toàn diện"
+    },
     "common": {
         "add": "Add",
         "edit": "Edit",

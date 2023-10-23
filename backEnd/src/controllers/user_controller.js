@@ -51,6 +51,7 @@ let handler_create_new_user = async (request, response) => {
 }
 
 let handler_edit_user = async (request, response) => {
+    console.log(request.body)
     if (!request.body.id) {
         return response.status(200).json({
             err_code: 1,
